@@ -1,0 +1,50 @@
+name: Automated Repository Updates
+
+on:
+  schedule:
+    # Runs every day at 10 AM, 2 PM, and 6 PM UTC
+    - cron: '0 10,14,18 * * *'
+  workflow_dispatch: # Manual trigger option
+
+jobs:
+  update-activity:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Update activity timestamp
+        run: |
+          echo "Activity update: $(date '+%Y-%m-%d %H:%M:%S UTC')" >> ACTIVITY.md
+          
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add ACTIVITY.md
+          git diff --staged --quiet || git commit -m "chore: automated activity update [skip ci]"
+          git push || echo "No changes to push"
+  
+  code-quality-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      
+      - name: Verify code compiles
+        run: mvn clean compile
+      
+      - name: Run quick tests
+        run: mvn test -Dtest=QuoteControllerIntegrationTest#shouldGetAllQuotes
