@@ -250,7 +250,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 Your Name
 - GitHub: [@w-dante](https://github.com/w-dante)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/dante-whyte)
+- LinkedIn: [Danté Whyte](https://linkedin.com/in/dante-whyte)
 
 ## 🙏 Acknowledgments
 
