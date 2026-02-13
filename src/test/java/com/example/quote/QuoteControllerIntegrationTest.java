@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -51,17 +52,16 @@ class QuoteControllerIntegrationTest {
     @Test
     @WithMockUser
     void shouldCreateQuote() throws Exception {
-        QuoteRequest request = QuoteRequest.builder()
-                .text("This is a test quote for our application.")
-                .author("Test Author")
-                .build();
+        QuoteRequest request = new QuoteRequest();
+        request.setText("This is a test quote for our application.");
+        request.setAuthor("Test Author");
 
         mockMvc.perform(post("/api/v1/quotes")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.text").value(request.getText()))
-                .andExpect(jsonPath("$.author").value(request.getAuthor()));
+                .andExpect(jsonPath("$.text").value("This is a test quote for our application."))
+                .andExpect(jsonPath("$.author").value("Test Author"));
     }
 
     @Test
@@ -90,14 +90,51 @@ class QuoteControllerIntegrationTest {
     @Test
     @WithMockUser
     void shouldValidateQuoteRequest() throws Exception {
-        QuoteRequest request = QuoteRequest.builder()
-                .text("Short")  // Too short (min 10 chars)
-                .author("")     // Empty author
-                .build();
+        QuoteRequest request = new QuoteRequest();
+        request.setText("Short");  // Too short (min 10 chars)
+        request.setAuthor("");     // Empty author
 
         mockMvc.perform(post("/api/v1/quotes")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest());
+    }
+    
+    @Test
+    @WithMockUser
+    void shouldUpdateQuote() throws Exception {
+        QuoteRequest request = new QuoteRequest();
+        request.setText("Updated quote text that is long enough to pass validation.");
+        request.setAuthor("Updated Author");
+
+        mockMvc.perform(put("/api/v1/quotes/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.text").value("Updated quote text that is long enough to pass validation."))
+                .andExpect(jsonPath("$.author").value("Updated Author"));
+    }
+    
+    @Test
+    @WithMockUser
+    void shouldDeleteQuote() throws Exception {
+        mockMvc.perform(delete("/api/v1/quotes/2"))
+                .andExpect(status().isNoContent());
+    }
+    
+    @Test
+    @WithMockUser
+    void shouldGetQuotesByAuthor() throws Exception {
+        mockMvc.perform(get("/api/v1/quotes/author/Steve Jobs"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray());
+    }
+    
+    @Test
+    @WithMockUser
+    void shouldGetAllAuthors() throws Exception {
+        mockMvc.perform(get("/api/v1/quotes/authors"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray());
     }
 }

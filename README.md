@@ -2,8 +2,8 @@
 
 A RESTful API service built with Spring Boot for managing and serving inspirational quotes. This project demonstrates core Spring Boot concepts including REST APIs, JPA, scheduled tasks, validation, exception handling, and security.
 
-![Java](https://img.shields.io/badge/Java-17-orange)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.1-brightgreen)
+![Java](https://img.shields.io/badge/Java-21-orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.0-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
 ## 🌟 Features
@@ -22,8 +22,8 @@ A RESTful API service built with Spring Boot for managing and serving inspiratio
 
 ## 🛠️ Tech Stack
 
-- **Java 17**
-- **Spring Boot 3.2.1**
+- **Java 21** (LTS)
+- **Spring Boot 3.3.0**
 - **Spring Data JPA** - Data persistence
 - **Spring Security** - Security configuration
 - **H2 Database** - In-memory database
@@ -33,7 +33,7 @@ A RESTful API service built with Spring Boot for managing and serving inspiratio
 
 ## 📋 Prerequisites
 
-- Java 17 or higher
+- Java 21 or higher
 - Maven 3.6+ (or use the Maven wrapper included)
 - Git
 
@@ -42,7 +42,7 @@ A RESTful API service built with Spring Boot for managing and serving inspiratio
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/daily-quote-service.git
+git clone https://github.com/w-dante/daily-quote-service.git
 cd daily-quote-service
 ```
 
@@ -249,8 +249,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 👤 Author
 
 Your Name
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
+- GitHub: [@w-dante](https://github.com/w-dante)
+- LinkedIn: [Your LinkedIn](https://linkedin.com/in/dante-whyte)
 
 ## 🙏 Acknowledgments
 

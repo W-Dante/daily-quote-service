@@ -48,3 +48,14 @@ Thumbs.db
 
 # Application specific
 application-local.properties
+
+# Documentation and Setup Guides (optional - uncomment to exclude from repo)
+START_HERE.md
+MAC_QUICK_START.md
+MAC_SETUP_GUIDE.md
+QUICK_START.md
+SETUP_GUIDE.md
+GITHUB_SETUP.md
+PROJECT_SUMMARY.md
+FEATURES_CHECKLIST.md
+setup-mac.sh

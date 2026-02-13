@@ -20,4 +20,22 @@ public class QuoteRequest {
     @NotBlank(message = "Author cannot be empty")
     @Size(max = 100, message = "Author name cannot exceed 100 characters")
     private String author;
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+
 }

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,5 +19,6 @@ public class QuoteResponse {
     private String text;
     private String author;
     private LocalDateTime createdAt;
+    @JsonProperty("isDailyQuote")
     private boolean isDailyQuote;
 }
